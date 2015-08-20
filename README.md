@@ -24,3 +24,30 @@ Também gostaríamos de acompanhar o desenvolvimento da sua aplicação através
 Nós solicitamos que você trabalhe no desenvolvimento desse sistema sozinho e não divulgue a solução desse problema pela internet.
 
 Bom desafio!
+
+# Solução
+
+* **Banco de Dados:** [Neo4J](http://neo4j.com/), por se tratar de um problema de roterização, que computacionamente pode ser resolvido utilizando Grafos como estruturas que mapeam o problema, utilizarei o Neo4J, que é uma solução de Banco de Dados justamente orientada a Grafos.
+
+* **Servidor de Aplicação:** [Spring Boot](http://projects.spring.io/spring-boot/) o Framework Spring tem se mostrado um padrão de mercado no desenvolvimento de aplicativos comerciais, cuja escala,  performance e manutenebilidade são caracteriscas fundamentais para seu sucesso. Em particular utilizando o Spring Boot, o aplicativo pode ser facilmente embarcado com uma caracterisca de Arquitetura conhecida atualmente como [MicroServiços](http://martinfowler.com/articles/microservices.html).
+
+* **Comunicação WebService:** [REST](https://pt.wikipedia.org/wiki/REST) será o protocolo escolhido para dispobilização dos Serviços Web atendidos pela aplicação. [JSON](https://pt.wikipedia.org/wiki/JSON) será o formato escolhido para troca de mensagens pelos serviços web disponibilizados pela aplicação.
+
+* **Implantação:** [Heroku](https://www.heroku.com/) será a plataforma onde o aplicativo será disponibilizado. TODO: colocar o link
+
+## Descrição as API Propostas
+
+* POST /api/mapa - Cria um novo mapa com a malha viária
+
+> Exemplo de mensagem Enviada:
+> {nome:"SP", rotas:["A B 10","B D 15","A C 20","C D 30","B E 50","D E 30"]}
+
+* POST /api/mapa/{:NOME\_MAPA}/{:CIDADE\_ORIGEM}/{:CIDADE\_DESTINO} - Retorna o trageto de menor custo entre a origem e o destino
+
+> Exemplo de mensagem Enviada:
+> {autonomia: 10, valor_combustivel: 2.50}
+
+> Exemplo de mensagem Retorno:
+> {rota: "A B D", custo: 6.25}
+
+> * Status: 200 OK ou 404 PAGE\_NOT\_FOUND Não existe rota entre origem e destino.
