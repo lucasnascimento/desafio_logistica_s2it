@@ -1,6 +1,5 @@
 package br.com.s2it.logistica;
 
-
 import java.io.IOException;
 
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -18,21 +17,23 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-@EnableNeo4jRepositories (basePackages = "br.com.s2it.logistica.repository")
-@EnableTransactionManagement(mode=AdviceMode.ASPECTJ)
-public class Application extends Neo4jConfiguration{
-	
+@EnableNeo4jRepositories(basePackages = "br.com.s2it.logistica.domain")
+@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
+public class Application extends Neo4jConfiguration {
+
 	Application() {
-        setBasePackage("br.com.s2it.logistica.model");
-    }
-	
+		setBasePackage("br.com.s2it.logistica.domain");
+	}
+
 	@Bean
 	GraphDatabaseService graphDatabaseService() {
-        return  new GraphDatabaseFactory().newEmbeddedDatabase("data/graphDatabase.db");// new EmbeddedGraphDatabase("graphDatabase.db");
-    }
-	
+		return new GraphDatabaseFactory()
+				.newEmbeddedDatabase("data/graphDatabase.db");// new
+																// EmbeddedGraphDatabase("graphDatabase.db");
+	}
+
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 }
