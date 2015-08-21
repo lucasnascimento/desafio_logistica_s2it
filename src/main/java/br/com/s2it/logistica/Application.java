@@ -5,31 +5,27 @@ import java.io.IOException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.AdviceMode;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
-@EnableNeo4jRepositories(basePackages = "br.com.s2it.logistica.domain")
-@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
-public class Application extends Neo4jConfiguration {
+@SpringBootApplication
+public class Application{
+	
+	@Configuration
+	@EnableNeo4jRepositories(basePackages = "br.com.s2it.logistica.domain")
+	static class ApplicationConfig extends Neo4jConfiguration {
 
-	Application() {
-		setBasePackage("br.com.s2it.logistica.domain");
-	}
+		public ApplicationConfig() {
+			setBasePackage("br.com.s2it.logistica.domain");
+		}
 
-	@Bean
-	GraphDatabaseService graphDatabaseService() {
-		return new GraphDatabaseFactory()
-				.newEmbeddedDatabase("data/graphDatabase.db");// new
-																// EmbeddedGraphDatabase("graphDatabase.db");
+		@Bean
+		GraphDatabaseService graphDatabaseService() {
+			return new  GraphDatabaseFactory().newEmbeddedDatabase("data/graph.db");
+		}
 	}
 
 	public static void main(String[] args) throws IOException {

@@ -1,5 +1,7 @@
 package br.com.s2it.logistica.test;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +10,6 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.neo4j.template.Neo4jOperations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +17,23 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.s2it.logistica.Application;
 import br.com.s2it.logistica.domain.Cidade;
 import br.com.s2it.logistica.domain.CidadeRepository;
+import br.com.s2it.logistica.service.RotaService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { Application.class })
 @Configuration
 @ComponentScan("br.com.s2it.logistica")
-public class CidadeRepositoryTest {
+public class RotaServiceTest {
 
 	@Autowired
 	CidadeRepository repository;
 	@Autowired
+	RotaService service;
+	@Autowired
 	GraphDatabaseService graphDatabaseService;
 	
 	@Before
+	@Transactional
 	public void setupTest(){
 		Cidade cidadeA = new Cidade("A", "SP");
 		repository.save(cidadeA);
@@ -54,15 +59,17 @@ public class CidadeRepositoryTest {
 		repository.save(cidadeD);
 		repository.save(cidadeE);
 	}
-	@Autowired
-	Neo4jOperations neo4jOperations;
 
 	@Test
 	@Transactional
-	public void findByNameTest() {
-		Assert.assertEquals(5, repository.count());
-		Cidade cidadeA = repository.findByNomeCidadeAndNomeMapa("A", "SP");
-		Assert.assertEquals(2,cidadeA.getRotas().size());
+	public void calculaRotaTest() {
+		Assert.assertEquals(new Double(6.25), service.calcularCusto("A", "D", "SP", 10.0, 2.5));
+		
+		List<Cidade> cidadesCaminhoMaisCurto = service.recuperarCaminhoMaisCurto("A", "D", "SP");
+		int index = 0;
+		for (String cidade : new String[]{"A","B","D"}){
+			Assert.assertEquals(cidade, cidadesCaminhoMaisCurto.get(index++).getNomeCidade());
+		}		
 	}
 
 }

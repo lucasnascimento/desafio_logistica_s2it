@@ -11,6 +11,7 @@ import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.support.index.IndexType;
+import org.springframework.transaction.annotation.Transactional;
 
 @NodeEntity
 public class Cidade {
@@ -25,16 +26,16 @@ public class Cidade {
 
 	@RelatedToVia(type = "ROTA_PARA", direction = Direction.OUTGOING)
 	private Set<Rota> rotas = new HashSet<Rota>();
-
+	
 	@SuppressWarnings("deprecation")
-	public Rota criarRota(Cidade cidadeDestino, Integer distancia,
-			GraphDatabaseService graphDatabaseService) {
-		Rota stationRel = new Rota(this, cidadeDestino, distancia);
+	@Transactional
+	public Rota criarRota(Cidade cidadeDestino, Integer distancia, GraphDatabaseService graphDatabaseService) {
+		Rota rota = new Rota(this, cidadeDestino, distancia);
 		Transaction transaction = graphDatabaseService.beginTx();
-		rotas.add(stationRel);
+		rotas.add(rota);
 		transaction.success();
 		transaction.finish();
-		return stationRel;
+		return rota;
 	}
 
 	public Cidade() {
@@ -104,7 +105,7 @@ public class Cidade {
 
 	@Override
 	public String toString() {
-		return "Cidade [id=" + id + ", nomeCidade=" + nomeCidade + "]";
+		return nomeCidade;
 	}
 
 	public String getNomeMapa() {

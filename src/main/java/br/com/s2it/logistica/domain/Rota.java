@@ -106,9 +106,7 @@ public class Rota {
 
 	@Override
 	public String toString() {
-		return "Rota [id=" + id + ", cidadeOrigem=" + cidadeOrigem
-				+ ", cidadeDestino=" + cidadeDestino + ", distancia="
-				+ distancia + "]";
+		return "" + cidadeOrigem + " " + cidadeDestino + " "+ distancia;
 	}
 
 }

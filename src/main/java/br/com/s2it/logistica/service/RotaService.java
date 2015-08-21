@@ -21,7 +21,7 @@ import br.com.s2it.logistica.domain.CidadeRepository;
 import br.com.s2it.logistica.domain.RelTypes;
 
 @Service
-public class RouteService {
+public class RotaService {
 
 	@Autowired
 	CidadeRepository cidadeRepository;
@@ -34,7 +34,7 @@ public class RouteService {
 
 	static final PathFinder<WeightedPath> PATH_FINDER = GraphAlgoFactory
 			.dijkstra(PathExpanders.forTypeAndDirection(RelTypes.ROTA_PARA,
-					Direction.OUTGOING), "distancia ");
+					Direction.OUTGOING), "distancia");
 
 	@SuppressWarnings("deprecation")
 	public List<Cidade> recuperarCaminhoMaisCurto(String cidadeOrigem,
@@ -75,7 +75,7 @@ public class RouteService {
 
 	@SuppressWarnings("deprecation")
 	public Double calcularCusto(String cidadeOrigem, String cidadeDestino,
-			String mapa, Integer autonomia, Double custoCombustivel) {
+			String mapa, Double autonomia, Double custoCombustivel) {
 		Transaction transaction = graphDatabaseService.beginTx();
 		WeightedPath path = getWeightPath(cidadeOrigem, cidadeDestino, mapa);
 
