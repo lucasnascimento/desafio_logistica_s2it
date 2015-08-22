@@ -1,3 +1,6 @@
+
+# Solução rodando em [https://desafio-s2it-logistica.herokuapp.com/api/mapa/SP](https://desafio-s2it-logistica.herokuapp.com/api/mapa/SP)
+
 # Descrição do Desafio
 Entregando mercadorias
 
@@ -25,7 +28,16 @@ Nós solicitamos que você trabalhe no desenvolvimento desse sistema sozinho e n
 
 Bom desafio!
 
-# Solução
+# Executando a Solução
+
+* git clone git@github.com:lucasnascimento/desafio\_logistica\_s2it.git
+* cd desafio\_logistica\_s2it
+* mvn package
+* java -jar target/logistica-0.0.1-SNAPSHOT.jar
+
+A solução estará rodando em http://localhost:8080/api/mapa
+
+# Expicação da Solução
 
 * **Banco de Dados:** [Neo4J](http://neo4j.com/), por se tratar de um problema de roterização, que computacionamente pode ser resolvido utilizando Grafos como estruturas que mapeam o problema, utilizarei o Neo4J, que é uma solução de Banco de Dados justamente orientada a Grafos.
 
@@ -33,14 +45,16 @@ Bom desafio!
 
 * **Comunicação WebService:** [REST](https://pt.wikipedia.org/wiki/REST) será o protocolo escolhido para dispobilização dos Serviços Web atendidos pela aplicação. [JSON](https://pt.wikipedia.org/wiki/JSON) será o formato escolhido para troca de mensagens pelos serviços web disponibilizados pela aplicação.
 
-* **Implantação:** [Heroku](https://www.heroku.com/) será a plataforma onde o aplicativo será disponibilizado. TODO: colocar o link
+* **Implantação:** [Heroku](https://www.heroku.com/) será a plataforma onde o aplicativo será disponibilizado. [https://desafio-s2it-logistica.herokuapp.com/api/mapa/SP](https://desafio-s2it-logistica.herokuapp.com/api/mapa/SP)
 
-## Descrição as API Propostas
+## Descrição dos webservices (apis) propostos 
+
+### Criar um novo MAPA
 
 * POST /api/mapa - Cria um novo mapa com a malha viária
 
 > Exemplo de mensagem Enviada:
-> {nome:"SP", rotas:["A B 10","B D 15","A C 20","C D 30","B E 50","D E 30"]}
+> {nomeMapa:"SP", rotas:["A B 10","B D 15","A C 20","C D 30","B E 50","D E 30"]}
 
 * POST /api/mapa/{:NOME\_MAPA}/{:CIDADE\_ORIGEM}/{:CIDADE\_DESTINO} - Retorna o trageto de menor custo entre a origem e o destino
 
@@ -51,3 +65,8 @@ Bom desafio!
 > {rota: "A B D", custo: 6.25}
 
 > * Status: 200 OK ou 404 PAGE\_NOT\_FOUND Não existe rota entre origem e destino.
+
+* GET /api/mapa/{nomeMapa} - Exibe as rotas de um mapa
+
+> Exemplo de mensagem de Retorno:
+> {"nomeMapa":"SP","rotas":["A B 10","A C 20","C D 30","B E 50","B D 15","D E 30"]}
