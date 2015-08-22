@@ -1,5 +1,7 @@
 
-# Solução rodando em [https://desafio-s2it-logistica.herokuapp.com/api/mapa/SP](https://desafio-s2it-logistica.herokuapp.com/api/mapa/SP)
+# Solução rodando em [https://desafio-s2it-logistica.herokuapp.com/](https://desafio-s2it-logistica.herokuapp.com/)
+
+Ao acessar o endereço acima será exbida uma pagina de ERRO 404, pois o acesso é feito todos através das APIs.
 
 # Descrição do Desafio
 Entregando mercadorias
@@ -37,7 +39,7 @@ Bom desafio!
 
 A solução estará rodando em http://localhost:8080/api/mapa
 
-# Expicação da Solução
+# Definições Arquiteturais da Solução
 
 * **Banco de Dados:** [Neo4J](http://neo4j.com/), por se tratar de um problema de roterização, que computacionamente pode ser resolvido utilizando Grafos como estruturas que mapeam o problema, utilizarei o Neo4J, que é uma solução de Banco de Dados justamente orientada a Grafos.
 
