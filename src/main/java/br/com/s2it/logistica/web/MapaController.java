@@ -34,8 +34,10 @@ public class MapaController {
 	private CidadeRepository cidadeRepository;
 
 	@RequestMapping(value = "/{nomeMapa}", method = RequestMethod.GET)
-	public List<String> recuperarInformacaoDoMapa(@PathVariable String nomeMapa) {
+	public MapaDTO recuperarInformacaoDoMapa(@PathVariable String nomeMapa) {
 		
+		MapaDTO mapa = new MapaDTO();
+		mapa.setNomeMapa(nomeMapa);
 		List<Cidade> todasCidadesDoMapa = cidadeRepository.findAllByNomeMapa(nomeMapa);
 		ArrayList<String> rotas = new ArrayList<String>();
 		
@@ -44,8 +46,8 @@ public class MapaController {
 				rotas.add(""+rotaDaCidade);
 			}
 		}
-
-		return rotas;
+		mapa.setRotas(rotas);
+		return mapa;
 	}	
 	
 	@RequestMapping(method = RequestMethod.POST)

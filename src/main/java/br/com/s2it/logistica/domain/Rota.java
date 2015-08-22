@@ -1,6 +1,7 @@
 package br.com.s2it.logistica.domain;
 
 import org.springframework.data.neo4j.annotation.EndNode;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelationshipEntity;
 import org.springframework.data.neo4j.annotation.StartNode;
@@ -11,12 +12,14 @@ public class Rota {
 	@GraphId
 	private Long id;
 	@StartNode
+	@Fetch
 	private Cidade cidadeOrigem;
 	@EndNode
+	@Fetch
 	private Cidade cidadeDestino;
 	private Integer distancia;
-	
-	public Rota(){
+
+	public Rota() {
 		super();
 	}
 
@@ -106,7 +109,7 @@ public class Rota {
 
 	@Override
 	public String toString() {
-		return "" + cidadeOrigem + " " + cidadeDestino + " "+ distancia;
+		return "" + cidadeOrigem + " " + cidadeDestino + " " + distancia;
 	}
 
 }
