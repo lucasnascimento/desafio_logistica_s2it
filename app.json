@@ -1,0 +1,5 @@
+{
+  "name": "Desafio S2it",
+  "description": "Deploy no Heruko",
+  "image": "heroku/java"
+}
