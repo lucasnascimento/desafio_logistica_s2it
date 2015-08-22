@@ -1,4 +1,4 @@
-package br.com.s2it.logistica.test;
+package br.com.s2it.logistica.test.service;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.s2it.logistica.Application;
 import br.com.s2it.logistica.domain.Cidade;
 import br.com.s2it.logistica.domain.CidadeRepository;
 import br.com.s2it.logistica.service.RotaService;
+import br.com.s2it.logistica.test.ApplicationTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { Application.class })
+@ContextConfiguration(classes = { ApplicationTest.class })
 @Configuration
 @ComponentScan("br.com.s2it.logistica")
 public class RotaServiceTest {

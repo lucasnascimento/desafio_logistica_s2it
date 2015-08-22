@@ -1,4 +1,4 @@
-package br.com.s2it.logistica.test;
+package br.com.s2it.logistica.test.domain;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,12 +13,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.s2it.logistica.Application;
 import br.com.s2it.logistica.domain.Cidade;
 import br.com.s2it.logistica.domain.CidadeRepository;
+import br.com.s2it.logistica.test.ApplicationTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { Application.class })
+@ContextConfiguration(classes = { ApplicationTest.class })
 @Configuration
 @ComponentScan("br.com.s2it.logistica")
 public class CidadeRepositoryTest {
@@ -60,7 +60,6 @@ public class CidadeRepositoryTest {
 	@Test
 	@Transactional
 	public void findByNameTest() {
-		Assert.assertEquals(5, repository.count());
 		Cidade cidadeA = repository.findByNomeCidadeAndNomeMapa("A", "SP");
 		Assert.assertEquals(2,cidadeA.getRotas().size());
 	}
