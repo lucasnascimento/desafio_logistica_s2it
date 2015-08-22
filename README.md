@@ -56,12 +56,12 @@ A solução estará rodando em http://localhost:8080/api/mapa
 * POST /api/mapa - Cria um novo mapa com a malha viária
 
 > Exemplo de mensagem Enviada:
-> {nomeMapa:"SP", rotas:["A B 10","B D 15","A C 20","C D 30","B E 50","D E 30"]}
+> {"nomeMapa":"SP", "rotas":["A B 10","B D 15","A C 20","C D 30","B E 50","D E 30"]}
 
 * POST /api/mapa/{:NOME\_MAPA}/{:CIDADE\_ORIGEM}/{:CIDADE\_DESTINO} - Retorna o trageto de menor custo entre a origem e o destino
 
 > Exemplo de mensagem Enviada:
-> {autonomia: 10, valor_combustivel: 2.50}
+> {"autonomia": 10.0, "valorCombustivel": 2.50}
 
 > Exemplo de mensagem Retorno:
 > {rota: "A B D", custo: 6.25}
